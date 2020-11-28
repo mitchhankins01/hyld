@@ -3,5 +3,10 @@
 
 HYLD is a prototype
 
-  - Track dividemds
+## Features
 
+  - Track dividends
+
+## To Do
+
+  - So much!
