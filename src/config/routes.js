@@ -24,6 +24,7 @@ const routes = [
   //   exact
   //   component={PasswordReset}
   // />,
+  <Route path="/hyld" exact component={Home} />,
   <Route path="/hyld/about" exact component={About} />,
   <AuthorizedRoute path="/hyld/home" exact component={Home} />,
   // <AuthorizedRoute path="/dialog_demo" exact component={DialogDemo} />,
