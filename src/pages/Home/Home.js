@@ -13,10 +13,15 @@ import { IEXCloudClient } from 'node-iex-cloud';
 import axios from 'axios';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import InputBase from '@material-ui/core/InputBase';
 // import Paper from '@material-ui/core/Paper';
 // import Typography from '@material-ui/core/Typography';
 // import Box from '@material-ui/core/Box';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
+import RestoreIcon from '@material-ui/icons/Restore';
 import Tooltip from '@material-ui/core/Tooltip';
 import Paper from '@material-ui/core/Paper';
 import { useSnackbar } from 'notistack';
@@ -27,7 +32,7 @@ import format from 'format-number';
 
 const HomePage = () => {
   const defaultTickers = ['HFRO', 'NNN', 'AAPL'];
-  const toastPositioning = { vertical: 'top', horizontal: 'right' };
+  const toastPositioning = { vertical: 'bottom', horizontal: 'left' };
   const iex = new IEXCloudClient(axios, {
     version: 'stable',
     publishable: 'pk_6260c74f116e4a78af6d9913806d951d',
@@ -37,6 +42,7 @@ const HomePage = () => {
   const [events, setEvents] = useState({});
   const { enqueueSnackbar } = useSnackbar();
   const [loading, setLoading] = useState(false);
+  const [tickerInput, setTickerInput] = useState('');
   const [tickers, setTickers] = useState(defaultTickers);
   const [state, setState] = useState(moment('2020-11-15'));
   const formatNumber = format({ prefix: '$', truncate: 2, padRight: 2 });
@@ -45,6 +51,7 @@ const HomePage = () => {
     (async function () {
       try {
         setLoading(true);
+        setTickerInput('');
         const res = await iex.batchSymbols(tickers).dividends()
         console.log(res);
         if (typeof res === 'string') {
@@ -82,10 +89,9 @@ const HomePage = () => {
       });
     }
 
-    const answer = window.prompt('Ticker:');
-    if (answer && !tickers.includes(answer)) {
-      setTickers([...tickers, answer.toUpperCase()]);
-      return enqueueSnackbar('Boom, Ticker Added', {
+    if (tickerInput && !tickers.includes(tickerInput)) {
+      setTickers([...tickers, tickerInput]);
+      return enqueueSnackbar(`Boom, ${tickerInput} Added`, {
         variant: 'info',
         anchorOrigin: toastPositioning,
       });
@@ -93,6 +99,14 @@ const HomePage = () => {
   }
 
   const onClickReset = () => setTickers(defaultTickers)
+
+  const onChangeTickerInput = event => setTickerInput(event.target.value.toUpperCase());
+  const onKeyDownTickerInput = event => {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      onClickAdd();
+    }
+  }
 
   const onDeleteTicker = deleteTicker =>
     setTickers([...tickers.filter(ticker => ticker !== deleteTicker)]);
@@ -115,8 +129,7 @@ const HomePage = () => {
                   },
                   ...sorted
                 ].map(({ property, value }, index) => (
-                  <div key={property} style={{ display: 'flex', justifyContent: 'space-between', margin: index === 0 ? '20px 7px 20px 7px' : 7, fontWeight: index === 0 && 800  }}>
-
+                  <div key={property} style={{ display: 'flex', justifyContent: 'space-between', margin: index === 0 ? '20px 7px 20px 7px' : 7, fontWeight: index === 0 && 800 }}>
                     <span>{property.split(/(?=[A-Z])/).map(a => a.charAt(0).toUpperCase() + a.substr(1) + ' ')}</span>
                     <span style={{ width: 20 }} />
                     <span>{value}</span>
@@ -126,7 +139,7 @@ const HomePage = () => {
               </div>
             }
           >
-            <Chip size='small' color='primary' style={{ display: 'flex', justifyContent: 'flex-start' }} key={events[key]['dividends'][0].exDate} label={key} icon={<AttachMoneyIcon fontSize='small' />} />
+            <Chip size='small' color='primary' style={{ display: 'flex', justifyContent: 'center' }} key={events[key]['dividends'][0].exDate} label={key} icon={<AttachMoneyIcon fontSize='small' />} />
           </Tooltip>
         );
       } else {
@@ -136,14 +149,38 @@ const HomePage = () => {
   }
 
   return (
-    <Page pageTitle='Dividend Tracker'>
+    <Page pageTitle='HYLD - Dividend Tracker'>
       <Scrollbar
         style={{ height: '100%', width: '100%', display: 'flex', flex: 1 }}
       >
         <Backdrop open={loading} style={{ zIndex: 99 }}>
           <CircularProgress size={80} style={{ zIndex: 999 }} />
         </Backdrop>
-        <Paper style={{ margin: '20px 20px 0 20px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', margin: 15 }}>
+          <div>
+            {tickers.map(ticker => {
+              const eventsLength = events[ticker] && events[ticker]['dividends'] ? events[ticker]['dividends'].length : 0;
+              return (
+                <Chip style={{ marginRight: 5, background: eventsLength === 0 && 'rgba(255, 0, 0, 0.5)' }} key={ticker} label={`${ticker}: ${eventsLength}`} onDelete={() => onDeleteTicker(ticker)} />
+              )
+            })}
+          </div>
+          <div>
+            <Paper component="form">
+              <IconButton onClick={onClickReset} disabled={JSON.stringify(tickers) === JSON.stringify(defaultTickers)} >
+                <RestoreIcon />
+              </IconButton>
+              <InputBase onKeyDown={onKeyDownTickerInput} onChange={onChangeTickerInput} value={tickerInput} placeholder='Add Ticker' />
+              <IconButton onClick={onClickAdd} >
+                <SearchIcon />
+              </IconButton>
+              <Divider orientation="vertical" />
+
+            </Paper>
+            {/* <Button variant='contained' color='primary' onClick={onClickAdd}>Add Ticker</Button> */}
+          </div>
+        </div>
+        <Paper style={{ margin: '0 15px' }}>
           <Calendar
             date={state}
             onChangeMonth={date => setState(date)}
@@ -175,20 +212,7 @@ const HomePage = () => {
         </Paper>
 
 
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 20 }}>
-          <div>
-            {tickers.map(ticker => {
-              const eventsLength = events[ticker] && events[ticker]['dividends'] ? events[ticker]['dividends'].length : 0;
-              return (
-                <Chip style={{ marginRight: 5, background: eventsLength === 0 && 'rgba(255, 0, 0, 0.5)' }} key={ticker} label={`${ticker}: ${eventsLength}`} onDelete={() => onDeleteTicker(ticker)} />
-              )
-            })}
-          </div>
-          <div>
-            <Button disabled={JSON.stringify(tickers) === JSON.stringify(defaultTickers)} style={{ marginRight: 10 }} variant='outlined' color='secondary' onClick={onClickReset}>Reset Tickers</Button>
-            <Button variant='contained' color='primary' onClick={onClickAdd}>Add Ticker</Button>
-          </div>
-        </div>
+        
       </Scrollbar>
     </Page>
   )

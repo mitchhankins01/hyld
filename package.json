@@ -2,6 +2,7 @@
   "name": "hyld",
   "version": "0.1.0",
   "private": true,
+  "main": "public/electron.js",
   "homepage": "http://mitchhankins01.github.io/hyld",
   "dependencies": {
     "@formatjs/intl-relativetimeformat": "^7.3.6",
@@ -9,6 +10,11 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.21.0",
     "base-shell": "^1.2.18",
+    "concurrently": "^5.3.0",
+    "electron": "^11.0.3",
+    "electron-builder": "^22.9.1",
+    "electron-is-dev": "^1.2.0",
+    "electron-store": "^6.0.1",
     "format-number": "^3.0.0",
     "github-markdown-css": "^4.0.0",
     "googleapis": "^65.0.0",
@@ -31,7 +37,8 @@
     "react-scripts": "4.0.1",
     "react-tooltip": "^4.2.11",
     "react-virtualized-auto-sizer": "^1.0.2",
-    "react-window": "^1.8.6"
+    "react-window": "^1.8.6",
+    "wait-on": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,7 +46,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "electron-dev": "concurrently \"BROWSER=none npm start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": [

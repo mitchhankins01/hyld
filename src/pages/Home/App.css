@@ -12,17 +12,12 @@
     color: #444;
   }
   
-  #calendar {
-    width: 640px;
-    height: 1480px;
-    margin: 100px auto;
-  }
-  
   .Calendar-grid {
     display: flex;
+    flex: 1;
     flex-wrap: wrap;
     width: 100%;
-    height: calc(100vh - 210px);
+    height: calc(100vh - 215px);
   }
   
   .Calendar-header {
@@ -49,7 +44,7 @@
   
   .Calendar-grid-item--current {
     font-weight: 700;
-    background-color: #f9f1e5;
+    background-color: #b0bec5;
   }
   
   .Calendar-grid-item.nextMonth,

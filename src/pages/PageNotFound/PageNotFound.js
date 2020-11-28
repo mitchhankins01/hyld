@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 const PageNotFound = () => {
   const intl = useIntl()
   const classes = useStyles()
-
+  let currentURL = window.location.href;
+  alert(currentURL)
   return (
     <Page pageTitle={intl.formatMessage({ id: 'page_not_found' })}>
       <Paper className={classes.paper}>

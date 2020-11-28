@@ -26,7 +26,7 @@ const routes = [
   // />,
   <Route path="/hyld" exact redirect='/hyld/home' />,
   <Route path="/hyld/about" exact component={About} />,
-  <AuthorizedRoute path="/hyld/home" exact component={Home} />,
+  <Route path="/hyld/home" exact component={Home} />,
   // <AuthorizedRoute path="/dialog_demo" exact component={DialogDemo} />,
   // <AuthorizedRoute path="/toast_demo" exact component={ToastDemo} />,
   // <AuthorizedRoute path="/filter_demo" exact component={FilterDemo} />,
