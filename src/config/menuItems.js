@@ -63,7 +63,7 @@ const getMenuItems = (props) => {
   if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
-        value: '/signin',
+        value: '/hyld/signin',
         onClick: isAuthorised
           ? () => {
               setAuth({ isAuthenticated: false })
@@ -79,7 +79,7 @@ const getMenuItems = (props) => {
   }
   return [
     {
-      value: '/home',
+      value: '/hyld/home',
       visible: isAuthorised,
       primaryText: 'Dividends',
       leftIcon: <CalendarTodayIcon />,
@@ -91,7 +91,7 @@ const getMenuItems = (props) => {
       leftIcon: <Web />,
       nestedItems: [
         {
-          value: '/dialog_demo',
+          value: '/hyld/about',
           visible: isAuthorised,
           primaryText: 'Support',
           leftIcon: <ChatBubble />,
@@ -99,7 +99,7 @@ const getMenuItems = (props) => {
       ],
     },
     {
-      value: '/about',
+      value: '/hyld/about',
       visible: true,
       primaryText: intl.formatMessage({ id: 'about' }),
       leftIcon: <InfoOutlined />,

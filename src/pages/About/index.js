@@ -11,7 +11,7 @@ export default function () {
 
   const loadData = async () => {
     const data = await fetch(
-      'https://raw.githubusercontent.com/TarikHuber/react-most-wanted/master/README.md'
+      'https://raw.githubusercontent.com/mitchhankins01/hyld/master/README.md'
     )
     const text = await data.text()
     setSource(text)
