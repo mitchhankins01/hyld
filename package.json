@@ -9,7 +9,11 @@
     "@material-ui/icons": "^4.9.1",
     "axios": "^0.21.0",
     "base-shell": "^1.2.18",
+    "format-number": "^3.0.0",
     "github-markdown-css": "^4.0.0",
+    "googleapis": "^65.0.0",
+    "holidayapi": "^4.1.0",
+    "http2": "^3.3.7",
     "intl": "^1.2.5",
     "intl-locales-supported": "^1.8.12",
     "material-ui-shell": "^1.1.25",
@@ -35,7 +39,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-"deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
