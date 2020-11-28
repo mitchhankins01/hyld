@@ -15,6 +15,7 @@ import StyleIcon from '@material-ui/icons/Style'
 import Tab from '@material-ui/icons/Tab'
 import ViewList from '@material-ui/icons/ViewList'
 import Web from '@material-ui/icons/Web'
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
 import allLocales from './locales'
 import allThemes from './themes'
 
@@ -80,59 +81,20 @@ const getMenuItems = (props) => {
     {
       value: '/home',
       visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'home' }),
-      leftIcon: <DaschboardIcon />,
+      primaryText: 'Dividends',
+      leftIcon: <CalendarTodayIcon />,
     },
 
     {
-      primaryText: intl.formatMessage({ id: 'demos', defaultMessage: 'Demos' }),
+      primaryText: 'Xyz',
       primaryTogglesNestedList: true,
       leftIcon: <Web />,
       nestedItems: [
         {
           value: '/dialog_demo',
           visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'dialog_demo',
-            defaultMessage: 'Dialog',
-          }),
+          primaryText: 'Support',
           leftIcon: <ChatBubble />,
-        },
-        {
-          value: '/toast_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'toast_demo',
-            defaultMessage: 'Toast',
-          }),
-          leftIcon: <QuestionAnswer />,
-        },
-        {
-          value: '/filter_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'filter_demo',
-            defaultMessage: 'Filter',
-          }),
-          leftIcon: <FilterList />,
-        },
-        {
-          value: '/list_page_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'list_page_demo_menu',
-            defaultMessage: 'List Page',
-          }),
-          leftIcon: <ViewList />,
-        },
-        {
-          value: '/tabs_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'tabs_demo',
-            defaultMessage: 'Tabs Page',
-          }),
-          leftIcon: <Tab />,
         },
       ],
     },
