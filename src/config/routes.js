@@ -9,6 +9,7 @@ const SignUp = lazy(() => import('../pages/SignUp/SignUp'))
 const PasswordReset = lazy(() => import('../pages/PasswordReset/PasswordReset'))
 const About = lazy(() => import('../pages/About'))
 const Home = lazy(() => import('../pages/Home/Home'))
+const HomeTable = lazy(() => import('../pages/Home/HomeTable'))
 const DialogDemo = lazy(() => import('../pages/DialogDemo/DialogDemo'))
 const ToastDemo = lazy(() => import('../pages/ToastDemo/ToastDemo'))
 const FilterDemo = lazy(() => import('../pages/FilterDemo'))
@@ -27,6 +28,7 @@ const routes = [
   <Route path="/hyld" exact redirect='/hyld/home' />,
   <Route path="/hyld/about" exact component={About} />,
   <Route path="/hyld/home" exact component={Home} />,
+  <Route path="/hyld/hometable" exact component={HomeTable} />,
   // <AuthorizedRoute path="/dialog_demo" exact component={DialogDemo} />,
   // <AuthorizedRoute path="/toast_demo" exact component={ToastDemo} />,
   // <AuthorizedRoute path="/filter_demo" exact component={FilterDemo} />,

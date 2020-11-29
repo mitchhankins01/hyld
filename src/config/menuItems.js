@@ -79,12 +79,17 @@ const getMenuItems = (props) => {
   }
   return [
     {
-      value: '/hyld/home',
+      value: '/hyld/hometable',
       visible: isAuthorised,
-      primaryText: 'Dividends',
+      primaryText: 'Dividend Table',
       leftIcon: <CalendarTodayIcon />,
     },
-
+    {
+      value: '/hyld/home',
+      visible: isAuthorised,
+      primaryText: 'Dividend Calendar',
+      leftIcon: <CalendarTodayIcon />,
+    },
     {
       primaryText: 'Xyz',
       primaryTogglesNestedList: true,
