@@ -138,16 +138,48 @@ const HomePage = () => {
 
   const generateTableBody = () => {
     const data = [];
+    const monthlyTotals = {
+      '01': 0,
+      '02': 0,
+      '03': 0,
+      '04': 0,
+      '05': 0,
+      '06': 0,
+      '07': 0,
+      '08': 0,
+      '09': 0,
+      '10': 0,
+      '11': 0,
+      '12': 0,
+    };
+
     for (const ticker in events) {
       const zygote = { ticker };
-      
-
+    
       events[ticker]['dividends'].map(forEach => {
+        monthlyTotals[forEach.exDate.split('-')[1]] += forEach.amount * amountOfShares;
         zygote[forEach.exDate.split('-')[1]] = forEach.amount * amountOfShares;
       });
 
       data.push(zygote);
     }
+
+    data.unshift({
+      ticker: 'Total',
+      '01': monthlyTotals['01'],
+      '02': monthlyTotals['02'],
+      '03': monthlyTotals['03'],
+      '04': monthlyTotals['04'],
+      '05': monthlyTotals['05'],
+      '06': monthlyTotals['06'],
+      '07': monthlyTotals['07'],
+      '08': monthlyTotals['08'],
+      '09': monthlyTotals['09'],
+      '10': monthlyTotals['10'],
+      '11': monthlyTotals['11'],
+      '12': monthlyTotals['12']
+    })
+
     return data.map((row) => {
       let total = 0;
       Object.keys(row).forEach(key => {
