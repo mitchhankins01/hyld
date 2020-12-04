@@ -1,0 +1,2 @@
+(this.webpackJsonphyld=this.webpackJsonphyld||[]).push([[23],{594:function(e,t,a){"use strict";a.r(t);var n=a(17),s=a(158),c=a(126),r=a.n(c),i=(a(0),a(151)),o=a(130);t.default=function(){var e=Object(i.a)(),t=Object(o.useSnackbar)().enqueueSnackbar;return Object(n.jsxs)(r.a,{pageTitle:e.formatMessage({id:"toast_demo",defaultMessage:"Toast demo"}),children:[Object(n.jsx)("br",{}),Object(n.jsx)(s.a,{onClick:function(){t("Test",{variant:"info",anchorOrigin:{vertical:"top",horizontal:"center"}})},children:"OPEN Toast"})]})}}}]);
+//# sourceMappingURL=23.82547038.chunk.js.map
