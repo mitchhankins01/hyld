@@ -35,7 +35,7 @@ const HomePage = () => {
   const toastPositioning = { vertical: 'bottom', horizontal: 'left' };
   const iex = new IEXCloudClient(axios, {
     version: 'stable',
-    publishable: 'pk_6260c74f116e4a78af6d9913806d951d',
+    publishable: 'pk_2d68b4fe291941b99ab69c2f105fa629',
   });
 
   const [error, setError] = useState(null);
